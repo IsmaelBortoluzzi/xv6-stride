@@ -60,4 +60,5 @@ struct proc {
 //   expandable heap
 
 
-#define STRIDE_CONSTANT 500
+#define STRIDE_CONSTANT 50000
+#define STRIDE_RESET_TRIGGER (2147483647 - STRIDE_CONSTANT)

@@ -90,7 +90,7 @@ found:
   p->state = EMBRYO;
   p->pid = nextpid++;
   p->tickets = tickets;
-  p->stride = 1;
+  p->stride = 0;
 
   release(&ptable.lock);
 
@@ -126,7 +126,7 @@ userinit(void)
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
 
-  p = allocproc(10);
+  p = allocproc(1);
   
   initproc = p;
   if((p->pgdir = setupkvm()) == 0)
@@ -359,6 +359,10 @@ void
 update_proc_stride(struct proc *p)
 {
   p->stride += STRIDE_CONSTANT / p->tickets;
+  
+  if(p->stride >= STRIDE_RESET_TRIGGER)
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+      p->stride = 0;
 }
 
 //PAGEBREAK: 42
