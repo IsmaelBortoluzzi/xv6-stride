@@ -1,3 +1,6 @@
+# Students
+Alexsandro Meurer Schneider, Ismael Bortoluzzi
+
 # HOW TO TEST THE SCHEDULER
 After running make and make qemu, type stest in the xv6 terminal and observe the statistics shown
 
